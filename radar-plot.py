@@ -9,7 +9,7 @@ import fileinput
 if not os.path.exists("images"):
     os.mkdir("images")
 
-for line in fileinput.input("/home/carson/Documents/4th_student_scores_transposed.csv"):
+for line in fileinput.input(sys.argv[1]):
     student = line.split(sep=' '),
     student_name = line.split(sep=' ')[0],
     student_ART = line.split(sep=' ')[1],
@@ -29,7 +29,7 @@ for line in fileinput.input("/home/carson/Documents/4th_student_scores_transpose
     stat_body = .8*float(student_PE[0]) + .2*float(student_SCIENCE[0]),
     stat_nature = .6*float(student_SCIENCE[0]) + .3*float(student_COMPUTER[0]) + .1*float(student_MATH[0]),
 
-    print(student_name[0]),
+    print(student_name[0]), #Shows which students are printing, good for watching if progress is hanging
 
 
     fig = go.Figure(data=go.Scatterpolar(
