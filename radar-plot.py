@@ -9,6 +9,10 @@ import fileinput
 if not os.path.exists("images"):
     os.mkdir("images")
 
+
+def make_image(plotter, name, cname, grade_level):
+    plotter.write_image(f"{grade_level}_{cname}_{name}.png")
+
 for line in fileinput.input(sys.argv[1]):
     student = line.split(sep=' '),
     student_cname = line.split(sep=' ')[0],
@@ -52,4 +56,4 @@ for line in fileinput.input(sys.argv[1]):
         ),
         showlegend=False
     )
-    fig.write_image(student_grade_level[0] + "_" + student_cname[0] + "_" + student_name[0] + ".png")
+    make_image(fig, student_name[0], student_cname[0], student_grade_level[0])
