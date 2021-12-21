@@ -3,7 +3,6 @@
 import os as os
 import sys as sys
 import plotly.graph_objects as go
-import pandas as pd
 import fileinput
 
 if not os.path.exists("images"):
