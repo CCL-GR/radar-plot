@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 
-import os as os
 import sys as sys
 import plotly.graph_objects as go
 import fileinput
-
-if not os.path.exists("images"):
-    os.mkdir("images")
-
 
 def make_radar_plot_image(plotter, name, cname, grade_level):
     plotter.update_layout(
