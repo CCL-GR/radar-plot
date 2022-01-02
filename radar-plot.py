@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import fileinput
 import os as os
 
-# TODO: Make images distribute into their own folder for easier parsing for teachers
+# TODO: Fix directory creation from cluttering if garbage input
 
 def make_radar_plot_image(plotter, name, cname, grade_level):
     plotter.update_layout(
@@ -22,35 +22,37 @@ def make_radar_plot_image(plotter, name, cname, grade_level):
         ),
         showlegend=False
     )
-    plotter.write_image(f"{grade_level}_{cname}_{name}.png")
+    make_dir_for_grade(grade_level)
+    grade_directory = get_dir_for_grade(grade_level)
+    plotter.write_image(f"{grade_directory}/{grade_level}_{cname}_{name}.png")
 
 def make_dir_for_grade(grade_level):
     if not os.path.exists(f"grade_{grade_level}"):
-        os.path.makedir(f"grade_{grade_level}")
+        os.mkdir(f"grade_{grade_level}")
 
 def get_dir_for_grade(grade_level):
     match grade_level:
-        case 1:
-            "grade_1"
-        case 2:
-            "grade_2"
-        case 3:
-            "grade_3"
-        case 4:
-            "grade_4"
-        case 5:
-            "grade_5"
-        case 6:
-            "grade_6"
-        case 7:
-            "grade_7"
-        case 8:
-            "grade_8"
-        case 9:
-            "grade_9"
+        case "1":
+            return "grade_1"
+        case "2":
+            return "grade_2"
+        case "3":
+            return "grade_3"
+        case "4":
+            return "grade_4"
+        case "5":
+            return "grade_5"
+        case "6":
+            return "grade_6"
+        case "7":
+            return "grade_7"
+        case "8":
+            return "grade_8"
+        case "9":
+            return "grade_9"
+        case _:
+            return "grade_99"
 
-
-    
 for line in fileinput.input(sys.argv[1]):
     student = line.split(sep=' '),
     student_cname = line.split(sep=' ')[0],
