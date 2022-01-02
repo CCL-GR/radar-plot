@@ -6,7 +6,6 @@ import plotly.graph_objects as go
 import fileinput
 import os as os
 
-# TODO: Fix directory creation from cluttering if garbage input
 
 def make_radar_plot_image(plotter, name, cname, grade_level):
     plotter.update_layout(
@@ -22,9 +21,15 @@ def make_radar_plot_image(plotter, name, cname, grade_level):
         ),
         showlegend=False
     )
-    make_dir_for_grade(grade_level)
     grade_directory = get_dir_for_grade(grade_level)
+    make_dir_for_grade(format_grade_string(grade_directory))
     plotter.write_image(f"{grade_directory}/{grade_level}_{cname}_{name}.png")
+
+def format_grade_string(grade_directory_string):
+    grade = grade_directory_string[-2:]
+    if (grade[0] == "_"):
+        grade = grade_directory_string[-1:]
+    return str(grade)
 
 def make_dir_for_grade(grade_level):
     if not os.path.exists(f"grade_{grade_level}"):
@@ -32,6 +37,10 @@ def make_dir_for_grade(grade_level):
 
 def get_dir_for_grade(grade_level):
     match grade_level:
+        case "k":
+            return "grade_K"
+        case "K":
+            return "grade_K"
         case "1":
             return "grade_1"
         case "2":
@@ -50,6 +59,12 @@ def get_dir_for_grade(grade_level):
             return "grade_8"
         case "9":
             return "grade_9"
+        case "10":
+            return "grade_10"
+        case "11":
+            return "grade_11"
+        case "12":
+            return "grade_12"
         case _:
             return "grade_99"
 
