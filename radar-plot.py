@@ -12,11 +12,11 @@ def make_radar_plot_image(plotter, name, cname, grade_level):
         polar=dict(
             radialaxis=dict(
                 visible=True,
-                range=[0,5],
+                range=[0,10],
                 tick0=0,
-                nticks=5,
+                nticks=10,
                 categoryorder="array",
-                categoryarray=[0,1,2,3,4,5]
+                categoryarray=[0,1,2,3,4,5,6,7,8,9,10]
             ),
         ),
         showlegend=False
@@ -73,21 +73,21 @@ for line in fileinput.input(sys.argv[1]):
     student_cname = line.split(sep=' ')[0],
     student_name = line.split(sep=' ')[1],
     student_grade_level = line.split(sep=' ')[2],
-    stat_verbal = float(line.split(sep=' ')[3]),
-    stat_logical = float(line.split(sep=' ')[4]),
-    stat_musical = float(line.split(sep=' ')[5]),
-    stat_body = float(line.split(sep=' ')[6]),
-    stat_visual_spacial = float(line.split(sep=' ')[7]),
-    stat_social = float(line.split(sep=' ')[8]),
-    stat_introspective =float(line.split(sep=' ')[9]),
-    stat_nature = float(line.split(sep=' ')[10]),
+    stat_verbal = float(line.split(sep=' ')[3])*2,
+    stat_logical = float(line.split(sep=' ')[4])*2,
+    stat_musical = float(line.split(sep=' ')[5])*2,
+    stat_body = float(line.split(sep=' ')[6])*2,
+    stat_visual_spacial = float(line.split(sep=' ')[7])*2,
+    stat_social = float(line.split(sep=' ')[8])*2,
+    stat_introspective =float(line.split(sep=' ')[9])*2,
+    stat_nature = float(line.split(sep=' ')[10])*2,
     fig = go.Figure(data=go.Scatterpolar(
-        r=[stat_visual_spacial[0], stat_introspective[0], stat_social[0], stat_verbal[0], stat_logical[0], stat_musical[0], stat_body[0], stat_nature[0]],
+        r=[stat_verbal[0], stat_logical[0], stat_musical[0], stat_body[0], stat_visual_spacial[0], stat_social[0], stat_introspective[0], stat_nature[0]],
         theta=['语言智能<br>(Verbal/Linguistic intelligence)',
                '数理逻辑智能<br>(Logical/<br>Mathematical intelligence)',
                '音乐韵律智能<br>(Musical/Rhythmic intelligence)',
                '身体运动智能<br>(Bodily/Kinesthetic intelligence)',
-               '视觉一空间智能<br>(Visual/Spatial intelligence)'
+               '视觉一空间智能<br>(Visual/Spatial intelligence)',
                '人际社交智能<br>(Inter-personal/Social intelligence)',
                '内省智能<br>(Intra-personal/<br>Introspective intelligence)',
                '自然探索智能<br>(Naturalistic intelligence)'],
